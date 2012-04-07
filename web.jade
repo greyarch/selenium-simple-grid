@@ -1,0 +1,10 @@
+html
+  head
+    title Simple Selenium Hub
+  body
+    h1 Available servers
+    each as in availableServers
+      li  #{as.name} [ #{as.host}:#{as.port} ]
+    h1 Busy servers
+    each bs in busyServers
+      li #{bs.name} [ #{bs.host}:#{bs.port} ]
