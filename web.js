@@ -1,7 +1,7 @@
 var jade = require('jade')
 var http = require('http')
 
-var selenium = require('./servers')
+var selenium = require('./selenium')
 
 exports.server = http.createServer(function(req, res) {
     jade.renderFile('web.jade', {

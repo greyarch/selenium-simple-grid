@@ -13,5 +13,5 @@ and then:
 
     npm install jade
 
-Configure the selenium servers (nodes) in the servers.js
+Configure the selenium servers (nodes) in the config.js
 Start the hub with "nodejs app.js"
