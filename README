@@ -1,3 +1,10 @@
+The Selenium Simple Grid is a Node.js implementation of the popular Selenium Grid.
+I got sick of trying to figure out how to extend the original Selenium Grid in order to get it to do some simple stuff and decided to see if it was possible to do this in a much simpler way.
+It only took about 50 lines of Node.js code to get the same behaviour - the only part I did not implement was the registration mechanism, cause I don't quite see the point of it.
+Anyway, now we have a much, much more maintainable and extensible selenium grid. Enjoy it.
+
+Installation:
+
 First install node.js, like so (on Ubuntu):
 
     sudo apt-get install python-software-properties
