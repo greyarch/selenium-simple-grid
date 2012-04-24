@@ -8,3 +8,6 @@ html
     h1 Busy servers
     each bs in busyServers
       li #{bs.name} [ #{bs.host}:#{bs.port} ]
+    h1 Mappings
+    each mapping, key in mappings
+      li #{mapping.url} (#{key}) <==> #{mapping.server}

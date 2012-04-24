@@ -4,14 +4,12 @@ config = require './config'
 
 availableServers = config.servers
 busyServers = []
+mappings = []
 
-exports.createSession = (clientEndpoint) ->
-    console.log clientEndpoint
+exports.createSession = () ->
     server = getAvailableServer()
     seleniumServer = net.connect server.port, server.host, () ->
         busyServers.push server
-    .on "data", (data) ->
-        console.log "Response: #{data.toString()}"
     .on "close", () ->
         releaseServer server
 
