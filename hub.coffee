@@ -1,12 +1,12 @@
 net = require 'net'
 selenium = require './selenium'
-config = require './config'
+config = require './servers'
 
-exports.mapping = {}
+exports.mapping = mapping = {}
 
 exports.server = net.createServer (incoming) ->
     clientId = "#{incoming.remoteAddress}:#{incoming.remotePort}" 
-    exports.mapping[clientId] = {url: "", server: ""}
+    mapping[clientId] = {url: "", server: ""}
     outgoing = selenium.createSession()
     incoming.pipe outgoing
     outgoing.pipe incoming
@@ -14,7 +14,7 @@ exports.server = net.createServer (incoming) ->
     incoming.on "data", (data) ->
         parse = /cmd=getNewBrowserSession&1.*&2=(.*)&\d/.exec data.toString()
         if parse
-            exports.mapping[clientId].url = decodeURIComponent parse[1]
+            mapping[clientId].url = decodeURIComponent parse[1]
     
     outgoing.on "connect", () ->
-        exports.mapping[clientId].server = "#{outgoing.remoteAddress}:#{outgoing.remotePort}"
+        mapping[clientId].server = "#{outgoing.remoteAddress}:#{outgoing.remotePort}"

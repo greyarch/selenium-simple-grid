@@ -1,0 +1,30 @@
+body {
+  padding: 10px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+div {
+	float: left;
+	padding: 10px 0;
+	margin: 0 0 0 10px;
+	display: inline;
+}
+
+#servers
+{
+	clear: left;
+        width: 500px;
+}
+
+input {
+    width: 150px;
+    margin: 2px;
+}
+
+input#port {
+    width: 50px;
+}
