@@ -14,7 +14,7 @@ webapp.configure () ->
     webapp.use(express.static(__dirname + '/public'));
 
 webapp.configure 'development', () ->
-    webapp.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+    webapp.use express.errorHandler({ dumpExceptions: true, showStack: true })
 
 webapp.configure 'production', () ->
     webapp.use(express.errorHandler());
@@ -26,6 +26,3 @@ webapp.get '/offline/:index', routes.offline
 webapp.get '/online/:index', routes.online
 webapp.get '/drop/:index', routes.drop
 webapp.post '/add', routes.add
-
-webapp.listen 8888, () ->
-    console.log("Web server listening on port %d in %s mode", webapp.address().port, webapp.settings.env);

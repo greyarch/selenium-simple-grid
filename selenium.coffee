@@ -31,11 +31,6 @@ exports.dropServer = (index) ->
 exports.addServer = (server) ->
     availableServers.push server
     
-popServer = (servers, index) ->
-    server = servers[index]
-    servers.splice index, 1
-    return server
-    
 getAvailableServer = () ->
     availableServers.shift()
 
