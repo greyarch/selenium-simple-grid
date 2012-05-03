@@ -12,9 +12,15 @@ exports.server = net.createServer (incoming) ->
     outgoing.pipe incoming
     
     incoming.on "data", (data) ->
-        parse = /cmd=getNewBrowserSession&1.*&2=(.*)&\d/.exec data.toString()
-        if parse
-            mapping[clientId].url = decodeURIComponent parse[1]
-    
+        request = data.toString()
+        selenium1 = /cmd=getNewBrowserSession&1.*&2=(.*)&\d/.exec request
+        selenium2 = /POST \/wd\/hub\/session\/(\d.*)\/url/.exec request
+        if selenium1
+            mapping[clientId].url = decodeURIComponent selenium1[1]
+        if selenium2
+            console.log "Session id is #{selenium2[1]}"
+            url = /{"url":"(.*)"}/.exec request
+            mapping[clientId].url = url[1]
+            
     outgoing.on "connect", () ->
         mapping[clientId].server = "#{outgoing.remoteAddress}:#{outgoing.remotePort}"
