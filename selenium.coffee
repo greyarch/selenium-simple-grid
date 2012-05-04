@@ -5,7 +5,6 @@ config = require './servers'
 availableServers = config.servers
 busyServers = []
 offlineServers = []
-mappings = []
 
 exports.createSession = () ->
     server = getAvailableServer()

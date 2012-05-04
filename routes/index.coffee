@@ -7,6 +7,10 @@ exports.index = (req, res) ->
     data.mappings = hub.mapping
     res.render 'index', data
     
+exports.clearMapping = (req, res) ->
+    hub.clearMapping()
+    res.redirect "/"
+    
 exports.offline = (req, res) ->
     selenium.takeOffline req.params.index
     res.redirect "/"

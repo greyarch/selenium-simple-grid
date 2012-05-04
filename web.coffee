@@ -26,3 +26,4 @@ webapp.get '/offline/:index', routes.offline
 webapp.get '/online/:index', routes.online
 webapp.get '/drop/:index', routes.drop
 webapp.post '/add', routes.add
+webapp.get '/clear-mapping', routes.clearMapping

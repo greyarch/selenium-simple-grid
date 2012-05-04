@@ -24,5 +24,6 @@ html
                     input#add(type='submit', value='Add server')
         #mappings
             h1 Mappings
+                a(href='/clear-mapping') [Clear]
             each mapping, key in mappings
                 li #{mapping.url} [originating at #{key}] <==> #{mapping.server}

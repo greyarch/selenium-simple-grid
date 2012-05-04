@@ -24,3 +24,6 @@ exports.server = net.createServer (incoming) ->
             
     outgoing.on "connect", () ->
         mapping[clientId].server = "#{outgoing.remoteAddress}:#{outgoing.remotePort}"
+
+exports.clearMapping = () ->
+    exports.mapping = mapping = {}
