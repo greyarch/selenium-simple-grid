@@ -1,31 +1,29 @@
-html
-  body
-    #container
-        h1 SELENIUM GRID CONSOLE
-        #servers
-            h1 Available servers
-            each as, index in availableServers
-                li.tooltip  #{as.name} 
-                    span.server-ip #{as.host}:#{as.port}
-                    a(href='/offline/#{index}')
-                        img(title="Take offline", src='images/offline.png')
-            h1 Busy servers
-            each bs in busyServers
-                li #{bs.name} [#{bs.host}:#{bs.port}]
-            h1 Offline servers
-            each os, index in offlineServers        
-                li #{os.name} [#{os.host}:#{os.port}] 
-                    a(href='/online/#{index}') [Put online]
-                    |  / 
-                    a(href='/drop/#{index}') [Drop server]
-            h1 Add server
-                form#addServer(method='POST', action='/add')
-                    input#serverName(value='selenium-slave', name='server[name]')
-                    input#host(value='10.19.55.', name='server[host]')
-                    input#port(value='4444', name='server[port]')
-                    input#add(type='submit', value='Add server')
-        #mappings
-            h1 Mappings
-                a(href='/clear-mapping') [Clear]
-            each mapping, key in mappings
-                li #{mapping.url} [originating at #{key}] <==> #{mapping.server}
+#container
+    h1 SELENIUM GRID CONSOLE
+    #servers
+        h1 Available servers
+        each as, index in availableServers
+            li.tooltip  #{as.name} 
+                span.server-ip #{as.host}:#{as.port}
+                a(href='/offline/#{index}')
+                    img(title="Take offline", src='images/offline.png')
+        h1 Busy servers
+        each bs in busyServers
+            li #{bs.name} [#{bs.host}:#{bs.port}]
+        h1 Offline servers
+        each os, index in offlineServers        
+            li #{os.name} [#{os.host}:#{os.port}] 
+                a(href='/online/#{index}') [Put online]
+                |  / 
+                a(href='/drop/#{index}') [Drop server]
+        h1 Add server
+            form#addServer(method='POST', action='/add')
+                input#serverName(value='selenium-slave', name='server[name]')
+                input#host(value='10.19.55.', name='server[host]')
+                input#port(value='4444', name='server[port]')
+                input#add(type='submit', value='Add server')
+    #mappings
+        h1 Mappings
+            a(href='/clear-mapping') [Clear]
+        each mapping, key in mappings
+            li #{mapping.url} [originating at #{key}] <==> #{mapping.server}
