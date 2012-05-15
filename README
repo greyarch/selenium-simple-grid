@@ -5,20 +5,11 @@ Anyway, now we have a much, much more maintainable and extensible selenium grid.
 
 Installation:
 
-First install node.js, like so (on Ubuntu):
+I assume you have git installed on your system.
 
-    sudo apt-get install python-software-properties
-    sudo add-apt-repository ppa:chris-lea/node.js
-    sudo apt-get update
-    sudo apt-get install nodejs
-
-Then install jade. Easiest way to do that is if you first install npm, like so:
-
-    sudo apt-get install npm
-
-and then:
-
-    npm install jade
-
-Configure the selenium servers (nodes) in the config.js
-Start the hub with "nodejs app.js"
+1. Install node.js.
+2. Get the source code of the project from git://github.com/greyarch/selenium-simple-grid.git.
+3. With npm (the node.js package manager) install express, jade and coffeescript (maybe globally).
+4. Configure the initially available selenium servers (nodes) in the servers.coffee file.
+5. Compile the sourcess with "coffee -c ." started from the root of the project.
+6. Start the hub with "nodejs app.js" from the root of the project.
