@@ -1,0 +1,6 @@
+h1 Add server
+form#addServer(method='POST', action='/add')
+    input#serverName(value='selenium-slave', name='server[name]')
+    input#host(value='10.19.55.', name='server[host]')
+    input#port(value='4444', name='server[port]')
+    input#add(type='submit', value='Add server')
