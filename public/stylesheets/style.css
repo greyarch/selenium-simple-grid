@@ -1,10 +1,31 @@
 body {
     padding: 10px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font:18px/27px DroidSansRegular,Arial,sans-serif;
 }
 
 a {
     color: #00B7FF;
+}
+
+a:hover {
+    background:#fff;
+    text-decoration:none;
+}
+
+li.tooltip span {
+    display:none;
+    margin-left:25px;
+    margin-top:-3px;
+    width:150px;
+    padding:2px 3px;
+}
+
+li.tooltip:hover span {
+    display:inline;
+    position:absolute;
+    background:#fff;
+    border:1px solid #ccc;
+    color:#6c6c6c;
 }
 
 div {
@@ -12,6 +33,10 @@ div {
     padding: 10px 0;
     margin: 0 0 0 10px;
     display: inline;
+}
+
+h2{
+    font:30px/27px NobileRegular,Arial,sans-serif;
 }
 
 #servers
@@ -27,4 +52,22 @@ input {
 
 input#port {
     width: 50px;
+}
+
+
+#available-servers {
+    width:300px;
+    padding-top:0;
+}
+
+li {
+    list-style-type:square;
+}
+
+.take-offline {
+    margin-left:5px;
+}
+
+.server-ip {
+    font:18px/27px DroidSansRegular,Arial,sans-serif;
 }

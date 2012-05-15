@@ -5,8 +5,10 @@ html
         #servers
             h1 Available servers
             each as, index in availableServers
-                li  #{as.name} [#{as.host}:#{as.port}] 
-                    a(href='/offline/#{index}') [Take offline]
+                li.tooltip  #{as.name} 
+                    span.server-ip #{as.host}:#{as.port}
+                    a(href='/offline/#{index}')
+                        img(title="Take offline", src='images/offline.png')
             h1 Busy servers
             each bs in busyServers
                 li #{bs.name} [#{bs.host}:#{bs.port}]
