@@ -8,6 +8,7 @@ exports.server = webapp = express.createServer()
 webapp.configure () -> 
     webapp.set('views', __dirname + '/views');
     webapp.set('view engine', 'jade');
+    webapp.set('view options', { pretty: true });
     webapp.use(express.bodyParser());
     webapp.use(express.methodOverride());
     webapp.use(webapp.router);
