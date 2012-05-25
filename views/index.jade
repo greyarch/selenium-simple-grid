@@ -7,7 +7,7 @@
                 li.tooltip  #{as.name} 
                     span.server-ip #{as.host}:#{as.port}
                     a(href='/offline/#{index}')
-                        img(title="Take offline", src='images/offline.png')
+                        img(title="Take offline", src='images/icons/offline.png')
         h1 Busy servers
         ul
             each bs in busyServers
@@ -17,13 +17,15 @@
             each os, index in offlineServers        
                 li.tooltip #{os.name} 
                     span.server-ip #{os.host}:#{os.port}
-                    a(href='/online/#{index}') [Put online]
-                    |  / 
-                    a(href='/drop/#{index}') [Drop server]
+                    a(href='/online/#{index}')
+                        img(title="Put online", src='images/icons/online.png')
+                    a(href='/drop/#{index}')
+                        img(title="Remove", src='images/icons/remove.png')
         include add-server
     #mappings
         h1 Mappings
-            a(href='/clear-mapping') [Clear]
+            a(href='/clear-mapping')
+                img(title="Clear history", src='images/icons/clear.png')
         ul
             each mapping, key in mappings
                 li #{mapping.url} [originating at #{key}] <==> #{mapping.server}
