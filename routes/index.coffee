@@ -4,12 +4,7 @@ util = require 'util'
 
 exports.index = (req, res) ->
     data = selenium.getServers()
-    data.mappings = hub.mapping
     res.render 'index', data
-    
-exports.clearMapping = (req, res) ->
-    hub.clearMapping()
-    res.redirect "/"
     
 exports.offline = (req, res) ->
     selenium.takeOffline req.params.index
@@ -26,3 +21,10 @@ exports.drop = (req, res) ->
 exports.add = (req, res) ->
     selenium.addServer req.body.server
     res.redirect "/"
+    
+exports.log = (req, res) ->
+    res.render 'log', {mappings: hub.mapping}
+
+exports.clearLog = (req, res) ->
+    hub.clearMapping()
+    res.redirect "/log"

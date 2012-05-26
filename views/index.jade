@@ -1,47 +1,47 @@
 #container.container
-    #header.header
-    #content.row
-        #servers.span5
-            h3 Available servers
-            include _server-table-header
-                tbody
-                    each as, index in availableServers
-                        tr
-                            td #{as.name}
-                            td #{as.host}:#{as.port}
-                            td
-                                a#offline(href='/offline/#{index}', title='Take offline for maintenance')
-                                    i.icon-wrench
-            - if (busyServers.length)
+    include _navbar
+    #content
+        #servers.row
+            #available-servers.span6
+                h3 Available servers
+                - if (availableServers.length)
+                    include _server-table-header
+                        tbody
+                            each as, index in availableServers
+                                tr
+                                    td #{as.name}
+                                    td #{as.host}:#{as.port}
+                                    td
+                                        a#offline(href='/offline/#{index}', title='Take offline for maintenance')
+                                            i.icon-wrench
+                - else 
+                    i There are no available servers at the moment.
+            #busy-servers.span6
                 h3 Busy servers
-                include _server-table-header
-                    tbody
-                        each bs in busyServers
-                            tr
-                                td #{bs.name}
-                                td #{bs.host}:#{bs.port}
-            - else 
-                h3 No servers are busy at the moment.
-            - if (offlineServers.length)
-                h3 Offline servers
-                include _server-table-header
-                    tbody
-                        each os, index in offlineServers
-                            tr
-                                td #{os.name}
-                                td #{os.host}:#{os.port}
-                                td
-                                    a#online(href='/online/#{index}', title='Put online')
-                                        i.icon-play
-                                    a#drop(href='/drop/#{index}', title='Drop this server')
-                                        i.icon-off
-            - else 
-                h3 No servers are offline at the moment.
-            include add-server
-        #mappings.span7
-            h3 Mappings
-                a#clear-history(href='/clear-mapping', title='Clear history')
-                    i.icon-file
-            ul
-                each mapping, key in mappings
-                    li #{mapping.url} [originating at #{key}] <==> #{mapping.server}
+                - if (busyServers.length)
+                    include _server-table-header
+                        tbody
+                            each bs in busyServers
+                                tr
+                                    td #{bs.name}
+                                    td #{bs.host}:#{bs.port}
+                - else 
+                    i No servers are busy at the moment.
+        #additional.row
+            .span12
+                - if (offlineServers.length)
+                    h3 Offline servers
+                    include _server-table-header
+                        tbody
+                            each os, index in offlineServers
+                                tr
+                                    td #{os.name}
+                                    td #{os.host}:#{os.port}
+                                    td
+                                        a#online(href='/online/#{index}', title='Put online')
+                                            i.icon-play
+                                        | 
+                                        a#drop(href='/drop/#{index}', title='Drop this server')
+                                            i.icon-off
+
+                include _add-server

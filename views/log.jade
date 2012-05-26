@@ -1,0 +1,20 @@
+#container.container
+    include _navbar
+    #content
+        #log.row
+            .span12
+                h3 Test execution log
+                    a(href='/log/clear', title='Clear log')
+                        i.icon-file.pull-right
+                table.table.table-striped.table-bordered.table-condensed    
+                    thead
+                        tr
+                            th Base test URL
+                            th Client endpoint
+                            th Server
+                    tbody
+                        each mapping, key in mappings
+                            tr
+                                td #{mapping.url} 
+                                td #{key} 
+                                td #{mapping.server}
