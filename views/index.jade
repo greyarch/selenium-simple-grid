@@ -1,31 +1,55 @@
-#container
-    h1 SELENIUM GRID CONSOLE
-    #servers
-        h1 Available servers
-        ul
-            each as, index in availableServers
-                li.tooltip  #{as.name} 
-                    span.server-ip #{as.host}:#{as.port}
-                    a(href='/offline/#{index}')
-                        img(title="Take offline", src='images/icons/offline.png')
-        h1 Busy servers
-        ul
-            each bs in busyServers
-                li #{bs.name} [#{bs.host}:#{bs.port}]
-        h1 Offline servers
-        ul
-            each os, index in offlineServers        
-                li.tooltip #{os.name} 
-                    span.server-ip #{os.host}:#{os.port}
-                    a(href='/online/#{index}')
-                        img(title="Put online", src='images/icons/online.png')
-                    a(href='/drop/#{index}')
-                        img(title="Remove", src='images/icons/remove.png')
-        include add-server
-    #mappings
-        h1 Mappings
-            a(href='/clear-mapping')
-                img(title="Clear history", src='images/icons/clear.png')
-        ul
-            each mapping, key in mappings
-                li #{mapping.url} [originating at #{key}] <==> #{mapping.server}
+#container.container
+    #header.header
+    #content.row
+        #servers.span4
+            h3 Available servers
+            table.table.table-striped
+                thead
+                    tr
+                        th Name
+                        th Endpoint
+                        th Actions
+                tbody
+                    each as, index in availableServers
+                        tr
+                            td #{as.name}
+                            td #{as.host}:#{as.port}
+                            td
+                                a#offline(href='/offline/#{index}', title='Take offline for maintenance')
+                                    i.icon-wrench
+            h3 Busy servers
+            table.table.table-striped
+                thead
+                    tr
+                        th Name
+                        th Endpoint
+                tbody
+                    each bs in busyServers
+                        tr
+                            td #{bs.name}
+                            td #{bs.host}:#{bs.port}
+            h3 Offline servers
+            table.table.table-striped
+                thead
+                    tr
+                        th Name
+                        th Endpoint
+                        th Actions
+                tbody
+                    each os, index in offlineServers
+                        tr
+                            td #{os.name}
+                            td #{os.host}:#{os.port}
+                            td
+                                a#online(href='/online/#{index}', title='Put online')
+                                    i.icon-play
+                                a#drop(href='/drop/#{index}', title='Drop this server')
+                                    i.icon-off
+            include add-server
+        #mappings.span8
+            h3 Mappings
+                a#clear-history(href='/clear-mapping', title='Clear history')
+                    i.icon-file
+            ul
+                each mapping, key in mappings
+                    li #{mapping.url} [originating at #{key}] <==> #{mapping.server}

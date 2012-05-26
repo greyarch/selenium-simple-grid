@@ -1,0 +1,15 @@
+h1 #{title}
+table.table.table-striped
+    thead
+        tr
+            th Name
+            th Endpoint
+            th Actions
+    tbody
+        each as, index in servers
+            tr
+                td #{as.name}
+                td #{as.host}:#{as.port}
+                td
+                    a(href='#{action.action}')
+                        i.icon-circle-arrow-down
