@@ -1,14 +1,9 @@
 #container.container
     #header.header
     #content.row
-        #servers.span4
+        #servers.span5
             h3 Available servers
-            table.table.table-striped
-                thead
-                    tr
-                        th Name
-                        th Endpoint
-                        th Actions
+            include _server-table-header
                 tbody
                     each as, index in availableServers
                         tr
@@ -17,36 +12,33 @@
                             td
                                 a#offline(href='/offline/#{index}', title='Take offline for maintenance')
                                     i.icon-wrench
-            h3 Busy servers
-            table.table.table-striped
-                thead
-                    tr
-                        th Name
-                        th Endpoint
-                tbody
-                    each bs in busyServers
-                        tr
-                            td #{bs.name}
-                            td #{bs.host}:#{bs.port}
-            h3 Offline servers
-            table.table.table-striped
-                thead
-                    tr
-                        th Name
-                        th Endpoint
-                        th Actions
-                tbody
-                    each os, index in offlineServers
-                        tr
-                            td #{os.name}
-                            td #{os.host}:#{os.port}
-                            td
-                                a#online(href='/online/#{index}', title='Put online')
-                                    i.icon-play
-                                a#drop(href='/drop/#{index}', title='Drop this server')
-                                    i.icon-off
+            - if (busyServers.length)
+                h3 Busy servers
+                include _server-table-header
+                    tbody
+                        each bs in busyServers
+                            tr
+                                td #{bs.name}
+                                td #{bs.host}:#{bs.port}
+            - else 
+                h3 No servers are busy at the moment.
+            - if (offlineServers.length)
+                h3 Offline servers
+                include _server-table-header
+                    tbody
+                        each os, index in offlineServers
+                            tr
+                                td #{os.name}
+                                td #{os.host}:#{os.port}
+                                td
+                                    a#online(href='/online/#{index}', title='Put online')
+                                        i.icon-play
+                                    a#drop(href='/drop/#{index}', title='Drop this server')
+                                        i.icon-off
+            - else 
+                h3 No servers are offline at the moment.
             include add-server
-        #mappings.span8
+        #mappings.span7
             h3 Mappings
                 a#clear-history(href='/clear-mapping', title='Clear history')
                     i.icon-file
