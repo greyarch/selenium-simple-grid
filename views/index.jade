@@ -1,7 +1,7 @@
-#container.container
+#container.container-fluid
     include _navbar
     #content
-        #servers.row
+        #servers.row-fluid
             #available-servers.span6
                 h3 Available servers
                 - if (availableServers.length)
@@ -27,7 +27,7 @@
                                     td #{bs.host}:#{bs.port}
                 - else 
                     i No servers are busy at the moment.
-        #additional.row
+        #additional.row-fluid
             .span12
                 - if (offlineServers.length)
                     h3 Offline servers
