@@ -9,7 +9,7 @@ I assume you have git installed on your system.
 
 1. Install node.js.
 2. Get the source code of the project from git://github.com/greyarch/selenium-simple-grid.git.
-3. With npm (the node.js package manager) install express, jade and coffee-script (maybe globally).
+3. Install all the dependencies with "npm install" started at the root of the project.
 4. Configure the initially available selenium servers (nodes) in the servers.coffee file. 
    You can always add more using the web GUI.
 5. Run with "coffee app.coffee"
