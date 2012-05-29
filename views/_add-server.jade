@@ -1,5 +1,9 @@
 form#addServer.well.form-inline(method='POST', action='/add')
+    p Add a server to the grid. Selenium server must be running at the specified endpoint.
+    label Name:
     input#serverName(value='selenium-slave', name='server[name]')
+    label IP:
     input#host(value='10.19.55.', name='server[host]')
+    label Port:
     input#port(value='4444', name='server[port]')
     input#add(type='submit', value='Add server')
