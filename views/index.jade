@@ -4,7 +4,7 @@
         #servers.row-fluid
             #available-servers.span6
                 h3 Available servers
-                - if (availableServers.length)
+                if availableServers.length
                     include _server-table-header
                         tbody
                             each as, index in availableServers
@@ -14,28 +14,31 @@
                                     td
                                         a#offline(href='/offline/#{index}', title='Take offline for maintenance')
                                             i.icon-wrench
-                - else 
+                else 
                     i There are no available servers at the moment.
             #busy-servers.span6
                 h3 Busy servers
-                - if (busyServers.length)
+                if busyServers.length
                     include _server-table-header
                         tbody
                             each bs in busyServers
                                 tr
                                     td #{bs.name}
                                     td #{bs.host}:#{bs.port}
-                - else 
+                else 
                     i No servers are busy at the moment.
         #additional.row-fluid
             .span12
-                - if (offlineServers.length)
+                if offlineServers.length
                     h3 Offline servers
                     include _server-table-header
                         tbody
                             each os, index in offlineServers
                                 tr
-                                    td #{os.name}
+                                    td 
+                                        if os.bad
+                                            i.icon-fire(title='Taken automatically offline by the grid. Probably could not be connected.')
+                                        #{os.name}
                                     td #{os.host}:#{os.port}
                                     td
                                         a#online(href='/online/#{index}', title='Put online')

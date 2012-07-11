@@ -5,13 +5,22 @@ config = require './servers'
 exports.mapping = mapping = {}
 
 exports.server = net.createServer (incoming) ->
-    clientId = "#{incoming.remoteAddress}:#{incoming.remotePort}" 
-    mapping[clientId] = {url: "", server: ""}
-    outgoing = selenium.createSession()
-    incoming.pipe outgoing
-    outgoing.pipe incoming
-    
+    incoming.on "connect", () ->
+        clientId = "#{incoming.remoteAddress}:#{incoming.remotePort}" 
+        mapping[clientId] = {url: "", server: ""}
+        outgoing = selenium.createSession()
+        
+        incoming.pipe outgoing
+        outgoing.pipe incoming
+
+        outgoing.on "connect", () ->
+            mapping["#{incoming.remoteAddress}:#{incoming.remotePort}"].server = "#{outgoing.remoteAddress}:#{outgoing.remotePort}"            
+        
+        outgoing.on "close", () ->
+            incoming.end()
+
     incoming.on "data", (data) ->
+        clientId = "#{incoming.remoteAddress}:#{incoming.remotePort}" 
         request = data.toString()
         selenium1 = /cmd=getNewBrowserSession&1.*&2=(.*)&\d/.exec request
         selenium2 = /POST \/wd\/hub\/session\/(\d.*)\/url/.exec request
@@ -22,8 +31,6 @@ exports.server = net.createServer (incoming) ->
             url = /{"url":"(.*)"}/.exec request
             mapping[clientId].url = url[1]
             
-    outgoing.on "connect", () ->
-        mapping[clientId].server = "#{outgoing.remoteAddress}:#{outgoing.remotePort}"
 
 exports.clearMapping = () ->
     exports.mapping = mapping = {}

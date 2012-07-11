@@ -12,6 +12,10 @@ exports.createSession = () ->
         busyServers.push server
     .on "close", () ->
         releaseServer server
+    .on "error", () ->
+        server.bad = true
+        console.log "ERROR: Server #{server.name} will be taken offline. Does not respond to connection requests."
+        seleniumServer.close
 
 exports.getServers = () -> 
     availableServers: availableServers,
@@ -20,9 +24,11 @@ exports.getServers = () ->
 
 exports.takeOffline = (index) ->
     offlineServers.push availableServers.pull(index)
-
+        
 exports.putOnline = (index) ->
-    availableServers.push offlineServers.pull(index)
+    srv = offlineServers.pull index
+    srv.bad = false
+    availableServers.push srv
     
 exports.dropServer = (index) ->
     offlineServers.pull(index)
@@ -34,5 +40,8 @@ getAvailableServer = () ->
     availableServers.shift()
 
 releaseServer = (server) ->
-    availableServers.push server
-    busyServers.splice busyServers.indexOf(server), 1
+    if server.bad
+        offlineServers.push server
+    else
+        availableServers.push server
+        busyServers.splice busyServers.indexOf(server), 1
